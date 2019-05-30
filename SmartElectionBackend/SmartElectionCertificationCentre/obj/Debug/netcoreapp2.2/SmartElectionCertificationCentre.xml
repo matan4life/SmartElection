@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SmartElectionCertificationCentre</name>
+    </assembly>
+    <members>
+        <member name="M:SmartElectionCertificationCentre.Controllers.CertificateController.GetCACertificate(System.String)">
+            <summary>
+            Gets the root certificate with concrete name
+            </summary>
+            <param name="issuerName">The election commitee name</param>
+            <returns>The root certificate</returns>
+            <response code="200">Returns the root certificate with specified issuer name</response>
+            <response code="400">The issuer name string was empty</response>
+            <response code="404">Certificate with specified issuer name was not found in the store</response>
+        </member>
+        <member name="M:SmartElectionCertificationCentre.Controllers.CertificateController.PostCreateCACertificate(System.String,System.DateTimeOffset,System.DateTimeOffset)">
+            <summary>
+            Creates a root certificate for election process
+            </summary>
+            <param name="issuerName">The election commitee name</param>
+            <param name="start">Start date</param>
+            <param name="end">Expiration date</param>
+            <returns>A root certificate from the store</returns>
+            <response code="201">Returns newly created root certificate</response>
+            <response code="400">The election commitee name was empty</response>
+            <response code="409">Server created certificate, but can't get it from the store</response>
+            <response code="422">The certificate with the same issuer name exists</response>
+        </member>
+        <member name="M:SmartElectionCertificationCentre.Controllers.CertificateController.GetUserCertificate(System.String,System.String)">
+            <summary>
+            Gets the  certificate with concrete name
+            </summary>
+            <param name="subjectName">User's name</param>
+            <param name="issuerName">Issuer name</param>
+            <returns>The user's certificate</returns>
+            <response code="200">Returns the certificate with specified subject name</response>
+            <response code="400">The subject name string was empty</response>
+            <response code="404">Certificate with specified subject name was not found in the store</response>
+        </member>
+        <member name="M:SmartElectionCertificationCentre.Controllers.CertificateController.DeleteCACertificate(System.String)">
+            <summary>
+            Removes the root certificate with specified issuer name
+            </summary>
+            <param name="issuerName">Issuer name of the needed root certificate</param>
+            <returns>Nothing</returns>
+            <response code="202">The certificate has been successfully deleted</response>
+            <response code="400">Invalid input</response>
+            <response code="404">The root certificate with specified issuer name was not found</response>
+        </member>
+        <member name="M:SmartElectionCertificationCentre.Controllers.CertificateController.DeleteCertificate(System.String,System.String)">
+            <summary>
+            Removes the certificate with specified subject name
+            </summary>
+            <param name="subjectName">Subject name of the needed certificate</param>
+            <param name="issuerName">Issuer name of the needed certificate</param>
+            <returns>Nothing</returns>
+            <response code="202">The certificate has been successfully deleted</response>
+            <response code="400">Invalid input</response>
+            <response code="404">The certificate with specified subject name was not found</response>
+        </member>
+        <member name="M:SmartElectionCertificationCentre.Controllers.CertificateController.PostCreateCertificate(System.String,System.String,System.DateTimeOffset,System.DateTimeOffset)">
+            <summary>
+            Creates a non-root certificate with specified subject name and issuer name of the root certificate
+            </summary>
+            <param name="subjectName">subject name of the certificate</param>
+            <param name="issuerName">issuer name of the certificate</param>
+            <param name="start">certificate's start date</param>
+            <param name="end">certificate's expiration date</param>
+            <response code="201">Returns a newly created non-root certificate</response>
+            <response code="400">Invalid input</response>
+            <response code="404">Centre could not find the root certificate with specified issuer name</response>
+            <response code="409">The certificate was created, but could not be returned at this moment</response>
+            <response code="422">The certificate with specified parameters does exist</response>
+            <returns></returns>
+        </member>
+        <member name="M:SmartElectionCertificationCentre.Controllers.CertificateController.GetCertificateVerification(System.String,System.String)">
+            <summary>
+            Checks whether the certificate with specified parameters is verified in the store
+            </summary>
+            <param name="subjectName">subject name of needed certificate</param>
+            <param name="issuerName">issuer name of needed certificate</param>
+            <returns>true, if the certificate has gone through verification, otherwise false</returns>
+            <response code="200">Returns the verification result</response>
+            <response code="400">Invalid input</response>
+            <response code="404">The certificate was not found</response>
+        </member>
+        <member name="M:SmartElectionCertificationCentre.Controllers.CertificateController.GetSignedData(System.String,System.String,System.String)">
+            <summary>
+            Signs the data
+            </summary>
+            <param name="subjectName">subject name of needed certificate</param>
+            <param name="issuerName">issuer name of needed certificate</param>
+            <param name="data">Data to sign</param>
+            <returns>b64 string</returns>
+            <response code="200">Returns the signed data</response>
+            <response code="400">Invalid input</response>
+            <response code="404">Certificate wasn't found</response>
+            <response code="409">Error during signing</response>
+        </member>
+        <member name="M:SmartElectionCertificationCentre.Controllers.CertificateController.GetSignatureVerification(System.String,System.String,System.String,System.String)">
+            <summary>
+            Verify the signed data
+            </summary>
+            <param name="subjectName">subject name of needed certificate</param>
+            <param name="issuerName">issuer name of needed certificate</param>
+            <param name="data">Data to sign</param>
+            <param name="info">Initial data</param>
+            <returns>Verification result</returns>
+            <response code="200">Returns the verification result</response>
+            <response code="400">Invalid input</response>
+            <response code="404">Certificate wasn't found</response>
+            <response code="409">Error during verifying</response>
+        </member>
+    </members>
+</doc>

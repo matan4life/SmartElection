@@ -1,0 +1,33 @@
+﻿@model SmartElectionFrontend.Controllers.Alternative
+
+@{
+    ViewData["Title"] = "Results";
+}
+
+<h1>Results</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Info)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.Info)
+            </td>
+        </tr>
+
+    </tbody>
+</table>
